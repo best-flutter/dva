@@ -1,0 +1,21 @@
+name: dva_generator
+description: A new flutter package project.
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  build: 0.12.7+3
+  build_config: 0.3.1+2
+  source_gen: 0.9.0+1
+  dva_annotation:
+    path: ../dva_annotation
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

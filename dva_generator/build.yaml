@@ -1,0 +1,13 @@
+# Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+builders:
+  dva_generator:
+    target: ":dva_generator"
+    import: "package:dva_generator/dva_generator.dart"
+    builder_factories: ["dvaAnnotation"]
+    build_extensions:
+      ".dart":
+        - ".dva.dart"
+    auto_apply: dependents
+    build_to: cache
+    # To copy the `.g.part` content into `.g.dart` in the source tree
+    #applies_builders: ["source_gen|combining_builder"]
