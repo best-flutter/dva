@@ -6,23 +6,12 @@
       <excludeFolder url="file://$MODULE_DIR$/dva/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/dva/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/dva/build" />
-      <excludeFolder url="file://$MODULE_DIR$/dva/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/dva/test/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/dva_annotation/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/dva_annotation/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/dva_annotation/build" />
-      <excludeFolder url="file://$MODULE_DIR$/dva_annotation/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/dva_annotation/test/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/dva_generator/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/dva_generator/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/dva_generator/build" />
-      <excludeFolder url="file://$MODULE_DIR$/dva_generator/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/dva_generator/test/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/example/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/example/test/packages" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

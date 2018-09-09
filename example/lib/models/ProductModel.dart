@@ -1,47 +1,34 @@
-
-
 import 'dart:async';
 
 import 'package:dva/dva.dart';
+import 'package:example/main.dva.dart';
 import 'package:example/services/ProductService.dart';
 import 'package:redux/redux.dart';
 
-class Product{
+class Product {
   final String id;
 
-  Product({
-    this.id
-});
+  Product({this.id});
 }
 
-
-
-class ProductDetail{
+class ProductDetail {
   final String id;
 
-  ProductDetail({
-    this.id
-  });
+  ProductDetail({this.id});
 }
 
-class ProductState{
-
+class ProductState {
   List<Product> products;
   bool loading;
   dynamic error;
   ProductDetail detail;
 
-  ProductState({
-    this.products : const <Product>[],
-    this.loading : false,
-    this.detail
-
-});
+  ProductState(
+      {this.products: const <Product>[], this.loading: false, this.detail});
 }
 
 @Model("product")
-class ProductModel extends BaseModel<ProductState>{
-
+class ProductModel extends BaseModel<ProductState> {
   ProductService productService = new ProductService();
 
   @override
@@ -49,25 +36,23 @@ class ProductModel extends BaseModel<ProductState>{
     return new ProductState();
   }
 
-  ProductState loading(ProductState state,bool loading){
+  ProductState loading(ProductState state, bool loading) {
     return state..loading = loading;
   }
 
-  ProductState detail(ProductState state,ProductDetail detail){
+  ProductState detail(ProductState state, ProductDetail detail) {
     return state..detail = detail;
   }
 
-
-  Future get(Store store,String id) async{
-    store.dispatch(new Action("product/loading",true));
+  Future get(Store<AppState> store, String id) async {
+    store.dispatch(new Action("product/loading", true));
     ProductDetail product = await productService.get(id);
-    store.dispatch(new Action("product/loading",false));
-    store.dispatch(new Action("product/detail",product));
+    store.dispatch(new Action("product/loading", false));
+    store.dispatch(new Action("product/detail", product));
   }
 
   @override
   Map<String, Function> getInvokers() {
     // TODO: implement getInvokers
   }
-
 }

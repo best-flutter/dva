@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:dva/dva.dart';
 
-
 @Router("")
 class HomePage extends StatelessWidget {
   HomePage(

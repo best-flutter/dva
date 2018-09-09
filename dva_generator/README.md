@@ -1,9 +1,38 @@
 # dva_generator
 
-A new flutter package project.
 
-## Getting Started
+## How it works
+    
+Scan every .dart file by using dart build system.
 
-For help getting started with Flutter, view our online [documentation](https://flutter.io/).
+Classes with annotation @Model,@Router,@Module will be parsed as 
 
-For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
+
+# 流程
+1、记录类信息
+2、生成代码如下:
+
+
+```
+class AppState{
+
+}
+
+
+
+
+
+class BootApp extends StatelessWidget{
+
+    
+
+}
+
+
+
+
+
+
+```
+
+

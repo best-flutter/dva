@@ -67,7 +67,7 @@ packages:
   dva_annotation:
     dependency: "direct main"
     description:
-      path: "..\\dva_annotation"
+      path: "../dva_annotation"
       relative: true
     source: path
     version: "0.0.1"

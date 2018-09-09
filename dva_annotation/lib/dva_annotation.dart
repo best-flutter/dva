@@ -1,6 +1,5 @@
 library dva_annotation;
 
-
 class StateValue {
   final String name;
   const StateValue(this.name);
@@ -30,19 +29,16 @@ class Router {
   const Router(this.path);
 }
 
-class Configuration{
+class Configuration {
   const Configuration();
 }
 
-class Bean{
+class Bean {
   const Bean();
 }
-
 
 class Model {
   final String name;
   const Model(this.name)
       : assert(name != null, "A valid name must be provided");
 }
-
-
