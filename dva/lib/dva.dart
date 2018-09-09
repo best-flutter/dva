@@ -1,13 +1,45 @@
 library dva;
-
 import 'dart:async';
-
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-
 import 'package:flutter/material.dart';
 
 export 'package:dva_annotation/dva_annotation.dart';
+
+typedef S StateReducer<S>(S state,dynamic action);
+
+typedef StateReducer<S> SyncReducerAdapter<S>(Function func);
+
+
+StateReducer<S> justState<S>(Function func){
+  return (S state,dynamic action){
+    return func(state);
+  };
+}
+
+
+
+
+
+abstract class ValueAdapter{
+  dynamic adapt(dynamic value);
+}
+
+class Map2NamedParameterAdapter implements ValueAdapter{
+  @override
+  adapt(value) {
+    return Map();
+  }
+}
+
+class Action2PayloadAdapter implements ValueAdapter{
+  @override
+  adapt(value) {
+    return value.payload;
+  }
+}
+
+
 
 abstract class Invoker<S> {
   S invoke(Store store, dynamic action);
@@ -17,20 +49,20 @@ abstract class BaseModel<T> {
   T getInitialState();
 
   Map<String,Function> getInvokers();
-
-  String getName();
 }
 
 typedef Map<String,Function> modelBuilder<T>(T model);
 
-typedef dynamic DvaBuilder(BuildContext context, ModelProxy modelProxy,DvaRouter router);
+typedef dynamic DvaBuilder(BuildContext context, DvaModels modelProxy,DvaRouter router);
 
-class ModelProxy {
+class DvaModels {
   Map<String, Function> _stateMap = {};
 
   Map<String, Function> _asyncMap = {};
 
-  ModelProxy();
+  Map<Type,Function> _modelEvent = {};
+
+  DvaModels();
 
   Map reduce(dynamic state, action) {
     String type = action.type;
@@ -51,6 +83,10 @@ class ModelProxy {
 
   void registerAsync(String key, Function func) {
     _asyncMap[key] = func;
+  }
+
+  void registerModelEvent<T>(Function func){
+    _modelEvent[T] = func;
   }
 
   bool handleAsyncAction(
@@ -87,9 +123,11 @@ class DvaRouter{
     )));
   }
 
-  void register<T>(String name, RouterPageBuilder builder) {
+  void register<T>({
+    String name, RouterPageBuilder builder
+  }) {
     _routers[name] = builder;
-    Dva.registerWidget<T>(name, builder);
+    Dva.registerWidget<T>(builder);
   }
 
 }
@@ -99,7 +137,7 @@ class Dva extends StatefulWidget {
 
   static Map<Type,ModelBuilder> _modelMap = {};
 
-  static void registerWidget<T>(String name,RouterPageBuilder builder) {
+  static void registerWidget<T>(RouterPageBuilder builder) {
     _widgetConnectInfo[T] = builder;
   }
 
@@ -135,7 +173,7 @@ class _DvaState extends State<Dva> {
   Store<Map> store;
 
 
-  final ModelProxy proxy = new ModelProxy();
+  final DvaModels proxy = new DvaModels();
   final DvaRouter router = new DvaRouter();
 
   @override
@@ -162,7 +200,7 @@ Function wrapDispatch(Store store, String event) {
   return ([payload]) => store.dispatch(new Action(event, payload));
 }
 
-Store<Map> createStore(ModelProxy proxy, Map initialState) {
+Store<Map> createStore(DvaModels proxy, Map initialState) {
   Store<Map> store = new Store<Map>((Map state, dynamic action) {
     return proxy.reduce(state, action);
   }, initialState: initialState, middleware: [

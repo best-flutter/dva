@@ -39,7 +39,7 @@ class ProductState{
 });
 }
 
-
+@Model("product")
 class ProductModel extends BaseModel<ProductState>{
 
   ProductService productService = new ProductService();
@@ -47,11 +47,6 @@ class ProductModel extends BaseModel<ProductState>{
   @override
   ProductState getInitialState() {
     return new ProductState();
-  }
-
-  @override
-  String getName() {
-    return "product";
   }
 
   ProductState loading(ProductState state,bool loading){

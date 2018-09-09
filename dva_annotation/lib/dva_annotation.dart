@@ -30,6 +30,15 @@ class Router {
   const Router(this.path);
 }
 
+class Configuration{
+  const Configuration();
+}
+
+class Bean{
+  const Bean();
+}
+
+
 class Model {
   final String name;
   const Model(this.name)

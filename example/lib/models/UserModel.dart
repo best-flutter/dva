@@ -4,6 +4,7 @@ class UserState {
 
 }
 
+@Model("user")
 class UserModel extends BaseModel<UserState> {
   UserState login(UserState state, dynamic action) {
    // print('test $action ${new DateTime.now()}');
@@ -15,10 +16,6 @@ class UserModel extends BaseModel<UserState> {
     return new UserState();
   }
 
-  @override
-  String getName() {
-    return "name";
-  }
 
   @override
   Map<String, Function> getInvokers() {

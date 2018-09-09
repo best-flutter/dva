@@ -1,6 +1,7 @@
 import 'package:dva/dva.dart';
 
 
+@Model("counter")
 class CounterModel extends BaseModel<int> with $CounterModel {
   @override
   int getInitialState() {

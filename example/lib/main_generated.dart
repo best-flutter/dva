@@ -11,28 +11,41 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 
-class A{
+///Generate the app state
+class AppState{
+  UserState user;
+  int counter;
 
+  AppState({
+    this.user,
+    this.counter
+  });
 }
 
-Map setupDvaModels(ModelProxy proxy) {
-  UserModel userModel = new UserModel();
-  proxy.registerSync("user/login", userModel.login);
+void $dvaCounterModel(DvaModels models,CounterModel model){
+  models.registerSync("counter/add",justState<int>(model.add));
+  models.registerSync("counter/sub",justState<int>(model.sub));
+}
 
+
+
+AppState setupDvaModels(DvaModels proxy) {
+  UserModel userModel = new UserModel();
   CounterModel counter = new CounterModel();
+
+  proxy.registerSync("user/login", userModel.login);
   proxy.registerSync(
       "counter/add", (int state, dynamic action) => counter.add(state));
 
-  Map state = {
-    userModel.getName(): userModel.getInitialState(),
-    counter.getName(): counter.getInitialState()
-  };
-  return state;
+  return new AppState(
+    user: userModel.getInitialState(),
+    counter: counter.getInitialState()
+  );
 }
 
-dynamic dvaBuilder(BuildContext context, ModelProxy proxy,DvaRouter router) {
+dynamic dvaBuilder(BuildContext context, DvaModels model, DvaRouter router) {
 
-  router.register<HomePage>("",(BuildContext context,dynamic param){
+  router.register<HomePage>(builder:(BuildContext context,dynamic param){
     return new StoreBuilder<Map>(onInit: (Store<Map> store) {
       store.dispatch(new Action("user/login", {"title": ""}));
     }, builder: (BuildContext context, Store<Map> store) {

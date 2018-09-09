@@ -47,7 +47,6 @@ class DetailPage extends StatelessWidget{
         children: <Widget>[
 
 
-
         ],
       ),
     );
